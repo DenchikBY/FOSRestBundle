@@ -11,16 +11,19 @@
 
 namespace FOS\RestBundle\Controller\Annotations;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * GET Route annotation class.
  *
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Get extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
-        return 'GET';
+        return Request::METHOD_GET;
     }
 }

@@ -19,9 +19,10 @@ namespace FOS\RestBundle\Controller\Annotations;
  *
  * @author Maximilian Bosch <maximilian.bosch.27@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Copy extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
         return 'COPY';
     }

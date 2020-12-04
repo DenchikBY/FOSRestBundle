@@ -22,29 +22,41 @@ use Symfony\Component\Validator\Constraints;
  */
 abstract class AbstractParam implements ParamInterface
 {
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var string */
-    public $key;
+    public string $key;
 
     /** @var mixed */
     public $default;
 
-    /** @var string */
-    public $description;
+    public string $description;
 
-    /** @var bool */
-    public $strict = false;
+    public bool $strict;
 
-    /** @var bool */
-    public $nullable = false;
+    public bool $nullable;
 
-    /** @var array */
-    public $incompatibles = [];
+    public array $incompatibles;
+
+    public function __construct(
+        string $name = '',
+        string $key = '',
+        $default = null,
+        string $description = '',
+        bool $strict = false,
+        bool $nullable = false,
+        array $incompatibles = []
+    ) {
+        $this->name          = $name;
+        $this->key           = $key;
+        $this->default       = $default;
+        $this->description   = $description;
+        $this->strict        = $strict;
+        $this->nullable      = $nullable;
+        $this->incompatibles = $incompatibles;
+    }
 
     /** {@inheritdoc} */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -56,19 +68,19 @@ abstract class AbstractParam implements ParamInterface
     }
 
     /** {@inheritdoc} */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /** {@inheritdoc} */
-    public function getIncompatibilities()
+    public function getIncompatibilities(): array
     {
         return $this->incompatibles;
     }
 
     /** {@inheritdoc} */
-    public function getConstraints()
+    public function getConstraints(): array
     {
         $constraints = [];
         if (!$this->nullable) {
@@ -79,7 +91,7 @@ abstract class AbstractParam implements ParamInterface
     }
 
     /** {@inheritdoc} */
-    public function isStrict()
+    public function isStrict(): bool
     {
         return $this->strict;
     }
@@ -87,7 +99,7 @@ abstract class AbstractParam implements ParamInterface
     /**
      * @return string
      */
-    protected function getKey()
+    protected function getKey(): string
     {
         return $this->key ?: $this->name;
     }

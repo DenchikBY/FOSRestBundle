@@ -11,16 +11,19 @@
 
 namespace FOS\RestBundle\Controller\Annotations;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * OPTIONS Route annotation class.
  *
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Options extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
-        return 'OPTIONS';
+        return Request::METHOD_OPTIONS;
     }
 }

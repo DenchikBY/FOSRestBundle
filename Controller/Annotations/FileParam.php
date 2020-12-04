@@ -25,24 +25,39 @@ use Symfony\Component\Validator\Constraints\Image;
  *
  * @author Ener-Getick <egetick@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class FileParam extends AbstractParam
 {
-    /** @var bool */
-    public $strict = true;
-
     /** @var mixed */
-    public $requirements = null;
+    public $requirements;
 
-    /** @var bool */
-    public $image = false;
+    public bool $image;
 
-    /** @var bool */
-    public $map = false;
+    public bool $map;
+
+    public function __construct(
+        string $name = '',
+        string $key = '',
+        $default = null,
+        string $description = '',
+        bool $strict = true,
+        bool $nullable = false,
+        array $incompatibles = [],
+        $requirements = null,
+        bool $image = false,
+        bool $map = false
+    ) {
+        parent::__construct($name, $key, $default, $description, $strict, $nullable, $incompatibles);
+
+        $this->requirements = $requirements;
+        $this->image        = $image;
+        $this->map          = $map;
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function getConstraints()
+    public function getConstraints(): array
     {
         $constraints = parent::getConstraints();
         if ($this->requirements instanceof Constraint) {

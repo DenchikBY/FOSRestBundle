@@ -22,10 +22,24 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Jordi Boggiano <j.boggiano@seld.be>
  * @author Boris Guéry    <guery.b@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class RequestParam extends AbstractScalarParam
 {
-    /** @var bool */
-    public $strict = true;
+    public function __construct(
+        string $name = '',
+        string $key = '',
+        $default = null,
+        string $description = '',
+        bool $strict = true,
+        bool $nullable = false,
+        array $incompatibles = [],
+        $requirements = null,
+        bool $map = false,
+        bool $allowBlank = true
+    ) {
+        parent::__construct($name, $key, $default, $description, $strict, $nullable, $incompatibles, $requirements,
+            $map, $allowBlank);
+    }
 
     /**
      * {@inheritdoc}

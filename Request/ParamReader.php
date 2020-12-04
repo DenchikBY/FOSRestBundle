@@ -23,7 +23,7 @@ use FOS\RestBundle\Controller\Annotations\ParamInterface;
  */
 final class ParamReader implements ParamReaderInterface
 {
-    private $annotationReader;
+    private Reader $annotationReader;
 
     public function __construct(Reader $annotationReader)
     {
@@ -52,6 +52,13 @@ final class ParamReader implements ParamReaderInterface
     {
         $annotations = $this->annotationReader->getMethodAnnotations($method);
 
+        if (PHP_VERSION_ID >= 80000) {
+            $annotations = array_merge($annotations, array_map(
+                [\ReflectionAttribute::class, 'newInstance'],
+                $method->getAttributes(ParamInterface::class)
+            ));
+        }
+
         return $this->getParamsFromAnnotationArray($annotations);
     }
 
@@ -62,6 +69,13 @@ final class ParamReader implements ParamReaderInterface
     {
         $annotations = $this->annotationReader->getClassAnnotations($class);
 
+        if (PHP_VERSION_ID >= 80000) {
+            $annotations = array_merge($annotations, array_map(
+                [\ReflectionAttribute::class, 'newInstance'],
+                $class->getAttributes(ParamInterface::class)
+            ));
+        }
+
         return $this->getParamsFromAnnotationArray($annotations);
     }
 
@@ -71,6 +85,7 @@ final class ParamReader implements ParamReaderInterface
     private function getParamsFromAnnotationArray(array $annotations): array
     {
         $params = [];
+
         foreach ($annotations as $annotation) {
             if ($annotation instanceof ParamInterface) {
                 $params[$annotation->getName()] = $annotation;

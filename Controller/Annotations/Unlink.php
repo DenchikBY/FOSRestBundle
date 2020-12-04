@@ -17,9 +17,10 @@ namespace FOS\RestBundle\Controller\Annotations;
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Unlink extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
         return 'UNLINK';
     }

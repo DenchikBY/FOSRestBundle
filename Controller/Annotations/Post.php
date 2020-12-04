@@ -11,16 +11,19 @@
 
 namespace FOS\RestBundle\Controller\Annotations;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * POST Route annotation class.
  *
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Post extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
-        return 'POST';
+        return Request::METHOD_POST;
     }
 }

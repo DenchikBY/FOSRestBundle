@@ -11,16 +11,19 @@
 
 namespace FOS\RestBundle\Controller\Annotations;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * PUT Route annotation class.
  *
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Put extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
-        return 'PUT';
+        return Request::METHOD_PUT;
     }
 }

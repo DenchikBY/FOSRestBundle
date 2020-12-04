@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Alexander <iam.asm89@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
 class QueryParam extends AbstractScalarParam
 {
     /**

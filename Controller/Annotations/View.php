@@ -19,67 +19,57 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * @Annotation
  * @Target({"METHOD","CLASS"})
  */
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
 class View extends Template
 {
-    /**
-     * @var int
-     */
-    protected $statusCode;
+    protected ?int $statusCode;
 
-    /**
-     * @var array
-     */
-    protected $serializerGroups;
+    protected ?array $serializerGroups;
 
-    /**
-     * @var bool
-     */
-    protected $serializerEnableMaxDepthChecks;
+    protected ?bool $serializerEnableMaxDepthChecks;
 
-    /**
-     * @param int $statusCode
-     */
-    public function setStatusCode($statusCode)
+    public function __construct(
+        ?string $template = null,
+        array $vars = [],
+        bool $streamable = false,
+        array $owner = [],
+        ?int $statusCode = null,
+        ?array $serializerGroups = null,
+        ?bool $serializerEnableMaxDepthChecks = null
+    ) {
+        parent::__construct(compact($template, $vars, $streamable, $owner));
+
+        $this->statusCode                     = $statusCode;
+        $this->serializerGroups               = $serializerGroups;
+        $this->serializerEnableMaxDepthChecks = $serializerEnableMaxDepthChecks;
+    }
+
+    public function setStatusCode(int $statusCode): void
     {
         $this->statusCode = $statusCode;
     }
 
-    /**
-     * @return int
-     */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    /**
-     * @param array $serializerGroups
-     */
-    public function setSerializerGroups($serializerGroups)
+    public function setSerializerGroups(array $serializerGroups): void
     {
         $this->serializerGroups = $serializerGroups;
     }
 
-    /**
-     * @return array
-     */
-    public function getSerializerGroups()
+    public function getSerializerGroups(): array
     {
         return $this->serializerGroups;
     }
 
-    /**
-     * @param bool $serializerEnableMaxDepthChecks
-     */
-    public function setSerializerEnableMaxDepthChecks($serializerEnableMaxDepthChecks)
+    public function setSerializerEnableMaxDepthChecks(bool $serializerEnableMaxDepthChecks): void
     {
         $this->serializerEnableMaxDepthChecks = $serializerEnableMaxDepthChecks;
     }
 
-    /**
-     * @return bool
-     */
-    public function getSerializerEnableMaxDepthChecks()
+    public function getSerializerEnableMaxDepthChecks(): bool
     {
         return $this->serializerEnableMaxDepthChecks;
     }

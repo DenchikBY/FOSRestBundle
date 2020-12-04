@@ -17,9 +17,10 @@ namespace FOS\RestBundle\Controller\Annotations;
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Link extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
         return 'LINK';
     }

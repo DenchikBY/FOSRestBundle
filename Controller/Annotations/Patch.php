@@ -11,16 +11,19 @@
 
 namespace FOS\RestBundle\Controller\Annotations;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * PATCH Route annotation class.
  *
  * @Annotation
  * @Target("METHOD")
  */
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class Patch extends Route
 {
-    public function getMethod()
+    public function getMethod(): ?string
     {
-        return 'PATCH';
+        return Request::METHOD_PATCH;
     }
 }

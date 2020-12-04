@@ -23,42 +23,33 @@ interface ParamInterface
 {
     /**
      * Get param name.
-     *
-     * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return mixed
      */
     public function getDefault();
 
-    /**
-     * @return string
-     */
-    public function getDescription();
+    public function getDescription(): string;
 
     /**
      * Get incompatibles parameters.
-     *
-     * @return array
      */
-    public function getIncompatibilities();
+    public function getIncompatibilities(): array;
 
     /**
      * @return Constraint[]
      */
-    public function getConstraints();
+    public function getConstraints(): array;
 
     /**
      * @return bool
      */
-    public function isStrict();
+    public function isStrict(): bool;
 
     /**
      * Get param value in function of the current request.
-     *
-     * @param mixed $default value
      *
      * @return mixed
      */

@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints\RegexValidator;
  *
  * @author Ener-Getick <egetick@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
 class Regex extends BaseRegex implements ResolvableConstraintInterface
 {
     use ResolverTrait;

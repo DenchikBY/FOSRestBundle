@@ -13,8 +13,8 @@ namespace FOS\RestBundle\Controller\Annotations;
 
 use FOS\RestBundle\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
@@ -25,16 +25,33 @@ use Symfony\Component\Validator\Constraints\NotNull;
 abstract class AbstractScalarParam extends AbstractParam
 {
     /** @var mixed */
-    public $requirements = null;
+    public $requirements;
 
-    /** @var bool */
-    public $map = false;
+    public bool $map;
 
-    /** @var bool */
-    public $allowBlank = true;
+    public bool $allowBlank;
+
+    public function __construct(
+        string $name = '',
+        string $key = '',
+        $default = null,
+        string $description = '',
+        bool $strict = false,
+        bool $nullable = false,
+        array $incompatibles = [],
+        $requirements = null,
+        bool $map = false,
+        bool $allowBlank = true
+    ) {
+        parent::__construct($name, $key, $default, $description, $strict, $nullable, $incompatibles);
+
+        $this->requirements = $requirements;
+        $this->map          = $map;
+        $this->allowBlank   = $allowBlank;
+    }
 
     /** {@inheritdoc} */
-    public function getConstraints()
+    public function getConstraints(): array
     {
         $constraints = parent::getConstraints();
 

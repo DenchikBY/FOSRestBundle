@@ -24,15 +24,15 @@ interface ParamReaderInterface
     /**
      * @return ParamInterface[] Param annotation objects of the method. Indexed by parameter name
      */
-    public function read(\ReflectionClass $reflection, string $method);
+    public function read(\ReflectionClass $reflection, string $method): array;
 
     /**
      * @return ParamInterface[] Param annotation objects of the method. Indexed by parameter name
      */
-    public function getParamsFromMethod(\ReflectionMethod $method);
+    public function getParamsFromMethod(\ReflectionMethod $method): array;
 
     /**
      * @return ParamInterface[] Param annotation objects of the class. Indexed by parameter name
      */
-    public function getParamsFromClass(\ReflectionClass $class);
+    public function getParamsFromClass(\ReflectionClass $class): array;
 }
